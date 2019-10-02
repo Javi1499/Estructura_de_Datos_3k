@@ -10,8 +10,8 @@
 
 <body>
     <div>
-            <label for="codigo">Código: </label>
-            <input id="codigo" type="number" value="1" disabled>
+        <label for="codigo">Código: </label>
+        <input id="codigo" type="number" value="1" disabled>
     </div>
 
     <div>
@@ -33,17 +33,13 @@
         <label for="descripcion">Descripcion</label>
         <input type="text" id="descripcion" />
     </div>
-    <div>
-        <label for="posicion">Posicion</label>
-        <input type="text" id="posicion" />
-    </div>
 
     <div>
         <button id="botonAgregar">Agregar</button>
     </div>
 
 
-    
+
     <div>
         <label for="eliminarC">Coloque Codigo</label>
         <input type="text" id="eliminarC" />
@@ -51,11 +47,19 @@
     </div>
 
     <div>
-            <label for="buscarC">Coloque Codigo</label>
-            <input type="text" id="buscarC" />
-            <button id="botonBuscar">Buscar</button>
-        </div>
-        <div id="buscarProducto"></div>
+        <label for="buscarC">Coloque Codigo</label>
+        <input type="text" id="buscarC" />
+        <button id="botonBuscar">Buscar</button>
+    </div>
+    <div>
+        <button id="btnMostrarProductos">Ver productos</button>
+    </div>
+    <div>
+
+        <h2>Productos</h2>
+        <article id="productos"></article>
+
+    </div>
 
     <script src="main.js" type="module"></script>
 </body>

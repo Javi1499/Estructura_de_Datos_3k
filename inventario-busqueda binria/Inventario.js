@@ -1,9 +1,9 @@
 import Productos from "./Productos.js"
 export default class Inventario {
-    constructor(producto) {
+    constructor(inventario=[], productosLista) {
 
-        this._inventarios = new Array();
-        this._producto = producto;
+        this._inventarios = inventario;
+        this._productosLista = productosLista;
         this._contador = 1;
     }
     get contador() {
@@ -16,37 +16,39 @@ export default class Inventario {
 
 
 
-    agregarProducto(nombre, precio, cantidad, descripcion, posicion) {
-        if (posicion === '' || posicion === (this._inventarios.length + 1).toString()) {
+    agregarProducto(nombre, precio, cantidad, descripcion) {
+        if (this._inventarios.length<=19) {
             this._inventarios.push(new Productos(this._contador, nombre, precio, cantidad, descripcion));
             this._contador += 1;
             alert('El producto se ha agregado');
-        } else if (Number(posicion) > 0 && Number(posicion) < this._inventarios.length) {
-            if (this._inventarios.length >= Number(posicion)) {
-                this._inventarios[Number(posicion) - 1] = new Productos(this._contador, nombre, precio, cantidad, descripcion);
-                this._contador++;
-                alert('El producto se ha agregado');
-            } else {
-                alert('No se pudo agregar');
+        } else {
+                alert('No se pudo agregar, alcanzo el maximo de productos');
             }
         }
-    }
 
-
-    buscarP(codigoP) {
-        codigoP = Number(codigoP);
+    buscarP(numero) {
+        let limiteI = 0;
+        let limiteS = this._inventarios.length;
+        let mitad = 0;
         let buscarP = '';
-        if (this._estaCodigo(codigoP)) {
-            this._inventarios.forEach(articulo => {
-                if (articulo.codigoP === codigoP) {
-                    buscarP = articulo;
-                    return;
-                }
-            });
-        } else {
-            alert('No se encontro el producto');
-        }
+        while (limiteI + 1 < limiteS) {
+            mitad = Math.trunc((limiteS + limiteI) / 2);
+            if (this._inventarios[mitad] === numero) {
+                console.log("El  numero " + numero + "se encuentra en la posicion " + mitad)
+                this._inventarios[mitad] = buscarP;
+                return
+            } else if (numero > Number(this._inventarios[mitad])) {
+                console.log(numero + "|||||||" + Number(this._inventarios[mitad]))
+                limiteI = mitad
+                console.log(mitad + " Mayor");
+            } else if (numero < this._inventarios[mitad]) {
+                console.log(numero + "|||||||" + Number(this._inventarios[mitad]))
 
+                limiteS = mitad;
+                console.log(mitad + " Menor");
+            }
+        }
+        alert('no se encontro')
         return buscarP;
     }
 
@@ -77,5 +79,17 @@ export default class Inventario {
         }
 
         return seEncuentra;
+    }
+    listado() {
+        this._productosLista.innerHTML = '';
+        let lista= [];
+        for (let i = 0; i < this._inventarios.length; i++) {
+            lista[i] = document.createElement('p');
+        }
+
+        for (let i = 0; i < this._inventarios.length; i++) {
+            lista[i].innerHTML = this._inventarios[i].toString();
+            this._productosLista.appendChild(lista[i]);
+        }
     }
 }

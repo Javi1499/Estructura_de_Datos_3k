@@ -1,11 +1,10 @@
 export default class Productos {
-    constructor(codigo, nombre, precio, cantidad, descripcion, posicion) {
+    constructor(codigo, nombre, precio, cantidad, descripcion) {
         this._codigo = codigo;
         this._nombre = nombre;
         this._precio = precio;
         this._cantidad = cantidad;
         this._descripcion = descripcion;
-        this._posicion = posicion;
 
     }
 
