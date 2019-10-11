@@ -97,11 +97,11 @@ export default class Inventario {
     listado() {
         let productosLista = '';
         let temp = this._inicio;
-        while (temp._siguiente != null) {
-            temp = temp._siguiente;
-            productosLista = (temp + "/n")
-            return productosLista
+        while (temp != null) {
+            productosLista+=(temp.toString()+"<br>")
+            temp = temp._siguiente; 
         }
+        return productosLista
 
     }
 }
