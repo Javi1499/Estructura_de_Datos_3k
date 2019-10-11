@@ -12,9 +12,9 @@ export default class Inventario {
 
 
     agregarProducto(posicion, nombre, precio, cantidad, descripcion) {
-        console.log(posicion)
+        let nuevo = new Productos(this.contador, nombre, precio, cantidad, descripcion, posicion);
         if (posicion === '' || posicion === (this.contador).toString()) {
-            let nuevo = new Productos(this.contador, nombre, precio, cantidad, descripcion, posicion);
+
             if (this._inicio === null) {
                 this._inicio = nuevo;
                 console.log(this._inicio);
@@ -22,13 +22,28 @@ export default class Inventario {
                 let temp = this._inicio;
                 while (temp._siguiente != null) {
                     temp = temp._siguiente;
-                    
+
                 }
                 temp._siguiente = nuevo;
                 console.log(this._inicio);
             }
             this._contador += 1;
             alert('El producto se ha agregado');
+        } else if (posicion <= this.contador) {
+            let temp = this._inicio;
+            while (temp._siguiente != null) {
+                if (temp._codigo === posicion - 1) {
+                    let temp2=temp._siguiente;
+                    temp._siguiente = nuevo;
+                    nuevo._siguiente=temp2;
+                   
+                    break
+                } 
+                else {
+                    temp = temp._siguiente;
+                }
+            }
+            alert('El producto se ha agregado'); 
         } else {
             alert('No se pudo agregar');
         }
@@ -58,12 +73,13 @@ export default class Inventario {
     }
 
     eliminarP(codigoP) {
-        codigoP = Number(codigoP - 1);
+        codigoP = Number(codigoP);
         console.log(this._inicio);
         if (this._estaCodigo(codigoP)) {
             let temp = this._inicio;
             while (temp._siguiente != null) {
-                if (temp._codigo === codigoP) {
+                (console.log(temp._codigo));
+                if (Number(temp._codigo) === codigoP - 1) {
                     temp._siguiente = temp._siguiente._siguiente;
                     break
                 } else {
@@ -82,7 +98,7 @@ export default class Inventario {
         let seEncuentra = false;
         let temp = this._inicio;
         while (temp._siguiente != null) {
-            console.log(temp._codigo);
+
             if (temp._codigo === codigoP) {
                 seEncuentra = true;
                 break
@@ -98,8 +114,8 @@ export default class Inventario {
         let productosLista = '';
         let temp = this._inicio;
         while (temp != null) {
-            productosLista+=(temp.toString()+"<br>")
-            temp = temp._siguiente; 
+            productosLista += (temp.toString() + "<br>")
+            temp = temp._siguiente;
         }
         return productosLista
 
