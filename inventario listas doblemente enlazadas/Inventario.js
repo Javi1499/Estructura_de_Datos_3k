@@ -1,9 +1,8 @@
 import Productos from "./Productos.js"
 export default class Inventario {
-    constructor(productosLista) {
+    constructor() {
         this._inicio = null;
         this._final = null;
-        this._productosLista = productosLista;
         this._contador = 1;
     }
     get contador() {
@@ -30,21 +29,21 @@ export default class Inventario {
                 nuevo._anterior = temp;
                 tempF = nuevo;
 
-            console.log(this._inicio);
+                console.log(this._inicio);
             }
             this._contador += 1;
             alert('El producto se ha agregado');
         } else if (posicion <= this.contador) {
             let temp = this._inicio;
-          //  let tempF =this._final;
-            let temp2=null;
+            //  let tempF =this._final;
+            let temp2 = null;
             while (temp._siguiente != null) {
                 if (temp._codigo === posicion - 1) {
                     temp2 = temp._siguiente;
                     temp._siguiente = nuevo;
-                    nuevo._anterior=temp;
+                    nuevo._anterior = temp;
                     nuevo._siguiente = temp2;
-                    temp2._anterior=nuevo
+                    temp2._anterior = nuevo
                     console.log(this._inicio);
                     break
                 } else {
@@ -85,16 +84,24 @@ export default class Inventario {
         codigoP = Number(codigoP);
         if (this._estaCodigo(codigoP)) {
             let temp = this._inicio;
+            let tempF = this._final;
             ////REALIZAR validaciones con if para el primer y ultimo termino////
-            
-            if(codigo)
-            while (temp._siguiente != null) {
-                (console.log(temp._codigo));
-                if (Number(temp._codigo) === codigoP - 1) {
-                    temp._siguiente = temp._siguiente._siguiente;
-                    break
-                } else {
-                    temp = temp._siguiente;
+console.log(codigoP)
+            if (codigoP === temp._codigo) {
+                this._inicio = temp._siguiente
+
+            } else if (codigoP === tempF._codigo) {
+                this._final = temp2._anterior;
+            } else {
+                while (temp._siguiente != null) {
+                    (console.log(temp._codigo));
+                    if (Number(temp._codigo) === codigoP - 1) {
+                        temp._siguiente = temp._siguiente._siguiente;
+                        temp._siguiente._anterior = temp;
+                        break
+                    } else {
+                        temp = temp._siguiente;
+                    }
                 }
             }
             alert("El producto se elimino")
