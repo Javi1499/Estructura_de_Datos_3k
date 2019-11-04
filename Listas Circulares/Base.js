@@ -14,6 +14,6 @@ export default class Base {
     }
 
     toString() {
-        return 'Nombre Base: ' + this._nombre + '||||Base siguiente: ' + this._siguiente + '||||' + 'Minutos: ' + this._minutos;
+        return 'Nombre Base: ' + this._nombre +  ' Minutos: ' + this._minutos;
     }
 }
