@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row ">
+        <div class="col-6 border">
+            <div>
+                <label for="nombreBase">Nombre Base: </label>
+                <input id="nombreBase" type="text">
+            </div>
+
+            <div>
+                <label for="minutos">Minutos:</label>
+                <input type="number" id="minutos" />
+            </div>
+            <div>
+                <button id="botonAgregar">Agregar</button>
+            </div>
+
+            <div>
+                <label for="eliminarC">Coloque Nombre de Base</label>
+                <input type="text" id="eliminarBase" />
+
+            </div>
+            <div>
+                <button id="botonEliminar">Eliminar</button>
+            </div>
+
+            <div>
+                <label for="buscarBase">Coloque NOmbre de Base</label>
+                <input type="text" id="buscarBase" />
+
+            </div>
+            <button id="botonBuscar">Buscar</button>
+            <div>
+
+            </div>
+            <di>
+                <p id="baseEncontrada"></p>
+            </di>
+
+            <div>
+                <button id="btnMostrarBases">Recorrido</button>
+            </div>
+
+            <div>
+
+                <h2>Bases</h2>
+                <article id="bases"></article>
+
+            </div>
+        </div>
+        <div class="col-6 border">
+            <h2>Crear Recorrido</h2>
+
+            <div>
+                <label for="baseInicio">Base de inicio : </label>
+                <input id="baseInicio" type="text">
+            </div>
+
+            <div>
+                <label for="horaInicio">Hora Inicio</label>
+                <input type="time" id="horaInicio" />
+            </div>
+            <div>
+                <label for="horaFinal">Hora Fin</label>
+                <input type="time" id="horaFinal" />
+            </div>
+            <div>
+                <button id="btnCrearRecorrido">Crear Recorrido</button>
+            </div>
+            <div>
+                <h2>Recorrido</h2>
+                <article id="recorrido"></article>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>
