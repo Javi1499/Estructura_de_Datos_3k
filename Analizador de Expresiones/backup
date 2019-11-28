@@ -1,0 +1,237 @@
+import Productos from "./Productos.js"
+export default class Inventario {
+    constructor() {
+        this._raiz = null;
+        this._nodos = "";
+        this._inicio = null;
+        this._final = null;
+    }
+
+    separarCaracteres(expresion) {
+        let tamaño = expresion.length;
+
+        for (let i = 0; i < tamaño; i++) {
+            let variable = expresion.charAt(i);
+            this.agregarALista(variable);
+        }
+        this.obtenerValores(this._inicio);
+
+    }
+
+    obtenerValores(dato) {
+        let nuevoNodo = dato;
+        console.log("aqui")
+        while (nuevoNodo != null) {
+            if (nuevoNodo._dato == ("*" || "/")) {
+                this.agregarProducto(nuevoNodo);
+            }
+            nuevoNodo = nuevoNodo._siguiente;
+        }
+    }
+
+    agregarProducto(dato) {
+        console.log("aqui x2")
+        let nuevoNodo = (dato);
+        this._agregar(nuevoNodo._anterior, nuevoNodo, nuevoNodo._siguiente);
+
+        
+        alert('El producto se ha agregado');
+        console.log(this._inicio);
+    }
+
+    _agregar(izquierda, raiz, derecha) {
+        console.log(raiz + "1666")
+        if (izquierda == null) {
+            this._raiz = raiz;
+            raiz._izquierda = izquierda;
+            raiz._derecha = derecha
+
+            this.eliminarP(derecha._dato)
+        } else {
+            this._raiz = raiz;
+            raiz._izquierda = izquierda;
+            this.eliminarP(izquierda._dato)
+            raiz._derecha = derecha
+            this.eliminarP(derecha._dato)
+
+
+        }
+
+
+
+        console.log(raiz);
+
+    }
+
+
+
+    buscarP(codigoP) {
+        codigoP = Number(codigoP);
+        let buscarP = '';
+        if (codigoP == this._raiz._codigo) {
+            buscarP = this._raiz;
+        } else {
+            buscarP = this._busqueda(codigoP, this._raiz);
+
+        }
+
+        return buscarP;
+    }
+
+    _busqueda(codigo, raiz) {
+        if (codigo < raiz._codigo) {
+            if (raiz._izquierda != null) {
+
+                raiz = raiz._izquierda
+                if (codigo == raiz._codigo) {
+                    return raiz;
+                } else {
+                    this._busqueda(codigo, raiz);
+                }
+
+            } else {
+                return "No se encontró"
+            }
+        } else if ((codigo > raiz._codigo)) {
+            if (raiz._derecha != null) {
+
+                raiz = raiz._derecha
+                if (codigo == raiz._codigo) {
+                    return raiz;
+                } else {
+                    this._busqueda(codigo, raiz);
+                }
+
+            } else {
+                return "No se encontró"
+            }
+        }
+
+    }
+
+    inOrder() {
+        this._nodos = '';
+
+        if (this._raiz != null) {
+            this._inOrder(this._raiz);
+        }
+
+        return this._nodos;
+    }
+
+    _inOrder(raiz) {
+        if (raiz != null) {
+            this._inOrder(raiz._izquierda);
+            this._nodos += raiz.toString() + "<br>";
+            this._inOrder(raiz._derecha);
+
+        }
+
+    }
+
+
+    preOrder() {
+        this._nodos = '';
+
+        if (this._raiz != null) {
+            this._preOrder(this._raiz);
+        }
+
+        return this._nodos;
+    }
+
+    _preOrder(raiz) {
+        if (raiz != null) {
+            this._nodos += raiz.toString() + "<br>";
+            this._preOrder(raiz._izquierda);
+            this._preOrder(raiz._derecha);
+
+        }
+
+    }
+
+    postOrder() {
+        this._nodos = '';
+
+        if (this._raiz != null) {
+            this._postOrder(this._raiz);
+        }
+
+        return this._nodos;
+    }
+
+    _postOrder(raiz) {
+        if (raiz != null) {
+            this._postOrder(raiz._izquierda);
+            this._postOrder(raiz._derecha);
+            this._nodos += raiz.toString() + "<br>";
+
+        }
+
+    }
+
+    agregarALista(caracter) {
+        let nuevo = new Productos(caracter);
+        if (this._inicio === null) {
+            this._inicio = nuevo;
+            this._final = nuevo;
+            console.log(this._inicio);
+        } else {
+            let temp = this._inicio;
+            let tempF = this._final;
+            while (temp._siguiente != null) {
+                temp = temp._siguiente;
+            }
+            temp._siguiente = nuevo;
+            nuevo._anterior = temp;
+            this._final = nuevo;
+
+            console.log(this._inicio);
+        }
+
+    }
+
+    eliminarP(codigoP) {
+        codigoP = (codigoP);
+        if (10 > 2) {
+            let temp = this._inicio;
+            let tempF = this._final;
+            ////REALIZAR validaciones con if para el primer y ultimo termino////
+            console.log(codigoP + "//////////");
+            if (codigoP == this._inicio._dato) {
+                temp._siguiente._anterior = null;
+
+                this._inicio = temp._siguiente;
+                console.log("si");
+
+            } else if (codigoP == tempF._dato) {
+                tempF._anterior._siguiente = null;
+                this._final = tempF._anterior;
+                console.log("2");
+
+            } else {
+                console.log("5");
+                while (temp._siguiente != null) {
+                    (console.log(temp._dato));
+                    if (Number(temp._dato) === codigoP) {
+                        temp._siguiente = temp._siguiente._siguiente;
+                        temp._siguiente._anterior = temp;
+                        break
+                    } else {
+                        temp = temp._siguiente;
+                    }
+                }
+            }
+            alert("El producto se elimino")
+            console.log(this._inicio);
+        } else {
+            alert('El producto no existe');
+        }
+
+    }
+
+
+
+
+
+}
