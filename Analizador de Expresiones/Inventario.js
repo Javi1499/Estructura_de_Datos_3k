@@ -24,36 +24,58 @@ export default class Inventario {
     }
 
 
-    realizarOperacion(preOrder) {
-
-        let tamaño = preOrder.length;
+    realizarOperacion() {
+        this.preOrder();
+        let tamaño = this._nodos.length;
 
         for (let i = 1; i < tamaño; i++) {
-            console.log('entró')
-            let variable = preOrder.charAt(i);
+            //console.log('entró')
+            let variable = this._nodos.charAt(i);
             this.agregarALista(variable);
         }
         //console.log(this._inicio)
         this._realizarOperacion()
+        alert(this._pila.pop());
     }
 
     _realizarOperacion() {
         if (this._inicio != null) {
-            console.log(this._inicio)
+            //console.log(this._inicio)
             let temp = this._inicio;
             while (temp._siguiente != null) {
                 temp = temp._siguiente;
                 //console.log(temp)
             }
             if (temp._dato != "*" && temp._dato != "/" && temp._dato != "+" && temp._dato != "-") {
-                this._pila.push(temp._dato);
+                this._pila.push((temp._dato));
             } else {
-                console.log('entro signo')
-                console.log(this._pila.pop()+"||||||||||");
-                resultado = Number(this._pila.pop()) / console.log(this._pila.pop()+"//////////////")+Number(this._pila.pop());
-                
-                console.log(resultado + "res");
-                this._pila.push(resultado);
+                let x1 = 0;
+                let x2 = 0;
+                //console.log('entro signo')
+                x1 = this._pila.pop();
+                x2 = this._pila.pop();
+                console.log(x1 + "x1//////x2" + x2)
+                if (temp._dato == "+") {
+                    resultado = Number(x1) + Number(x2);
+
+                    console.log(resultado);
+                    this._pila.push(resultado);
+                } else if (temp._dato == "-") {
+                    resultado = Number(x1) - Number(x2);
+
+                    console.log(resultado);
+                    this._pila.push(resultado);
+                } else if (temp._dato == "*") {
+                    resultado = Number(x1) * Number(x2);
+
+                    console.log(resultado);
+                    this._pila.push(resultado);
+                } else if (temp._dato == "/") {
+                    resultado = Number(x1) / Number(x2);
+
+                    console.log(resultado);
+                    this._pila.push(resultado);
+                }
             }
             this.eliminarP(temp._dato);
             this._realizarOperacion();
@@ -134,7 +156,6 @@ export default class Inventario {
         if (this._inicio != null) {
             this._preOrder(this._inicio);
         }
-        this.realizarOperacion(this._nodos);
 
         return this._nodos;
     }
@@ -205,7 +226,7 @@ export default class Inventario {
             } else if (codigoP == tempF._dato) {
                 tempF._anterior._siguiente = null;
                 this._final = tempF._anterior;
-                console.log("se elimino");
+                //console.log("se elimino");
 
 
             } else {

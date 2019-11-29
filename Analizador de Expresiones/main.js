@@ -13,7 +13,7 @@ document.querySelector('#btnAceptar').addEventListener('click', () => {
 document.querySelector('#btnRealizar').addEventListener('click', () => {
 
 
-    inventario1.realizarO();
+    inventario1.realizarOperacion();
 
 });
 

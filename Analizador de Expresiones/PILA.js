@@ -2,8 +2,7 @@ import Productos from "./Productos.js";
 
 export default class PILA {
     constructor() {
-        this._datos = null;
-        this._ultimo = null;
+        this._datos = [];
         this._tamanio = 0;
     }
 
@@ -13,33 +12,16 @@ export default class PILA {
 
     push(nodo) {
         let nuevo = new Productos(nodo);
-        if (this._datos == null) {
-            this._datos = nuevo;
-            this._ultimo = nuevo;
-        } else {
-            let temp = this._datos;
-            while (temp._siguiente != null) {
-                temp = temp._siguiente;
-            }
-            temp._siguiente = nuevo;
-            nuevo._anterior = temp;
-            this._ultimo = nuevo
-        }
-        this._tamanio++;
-        console.log(this._datos)
+        this._datos.push(nuevo)
+        this._tamanio++
+
     }
 
 
 
     pop() {
-        let temp = this._datos;
-        let tempF = this._ultimo;
-        while (temp._siguiente != null) {
-            temp = temp._siguiente;
-        }
-        tempF._anterior._siguiente = null;
-        this._ultimo = tempF._anterior;
-        this._tamanio--;
-        return tempF;
+        this._tamanio--
+        let dato = this._datos.pop(this.tamanio)
+        return dato._dato;
     }
 }
